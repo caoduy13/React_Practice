@@ -3,18 +3,11 @@ import { useAuthStore } from "@/features/auth/store";
 import Logout from "@/features/auth/components/Logout";
 import { Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
-import { useEffect, useState } from "react";
 
 export default function Header() {
   const accessToken = useAuthStore((state) => state.accessToken);
   const { theme, setTheme, resolvedTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  const isDark = mounted ? (theme === "system" ? resolvedTheme === "dark" : theme === "dark") : false;
+  const isDark = theme === "system" ? resolvedTheme === "dark" : theme === "dark";
 
   return (
     <header className="bg-gradient-to-r from-[#c4956a] via-[#d4a5a5] to-[#c4956a] dark:from-[#3d2820] dark:via-[#4a2c2a] dark:to-[#3d2820] text-white shadow-md border-b border-white/10">
